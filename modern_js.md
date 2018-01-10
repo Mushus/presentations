@@ -1,6 +1,6 @@
 # Modern JS
 
-## JS勉強会
+## JS勉強会 開発環境編
 
 JS = JavaScript
 
