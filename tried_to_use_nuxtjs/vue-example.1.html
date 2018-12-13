@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.20/dist/vue.js"></script>
+  </head>
+  <body>
+
+    <h1>カウンター</h1>
+
+    <!-- テンプレート -->
+    <div id="app">
+
+      <div>{{ count }}</div>
+
+      <div v-if="count === 0">zero</div>
+      <div v-if="count > 0">plus</div>
+      <div v-if="count < 0">minus</div>
+
+      <button type="button" @click="add()">+</button>
+      <button type="button" @click="sub()">-</button>
+
+      <pre>{{ allData }}</pre>
+    </div>
+
+    <!-- vue 初期化 -->
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          count: 0 // カウンターの値
+        },
+        methods: {
+          // 加算
+          add() {
+            this.count++
+          },
+          // 減算
+          sub() {
+            this.count--
+          },
+        },
+
+        // data 確認用
+        computed: {
+          allData() {
+            return JSON.stringify(this.$data, null , "  ")
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

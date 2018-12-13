@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.20/dist/vue.js"></script>
+    <style>
+      .finished {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>TODOリスト</h1>
+
+    <!-- テンプレート -->
+    <div id="app">
+
+      <div>
+        <input type="text" v-model="input">
+        <button type="button" @click="add()">追加する</button>
+      </div>
+
+      <ul>
+        <li v-for="(item, index) in list" :key="index">
+          <span :class="item.status">{{ item.name }}</span>
+          <button type="button" @click="finish(index)">完了</button>
+        </li>
+      </ul>
+
+      <pre>{{ allData }}</pre>
+    </div>
+
+    <!-- vue 初期化 -->
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          input: '',
+          list: [],
+        },
+        methods: {
+          // リストに追加する
+          add() {
+            this.list.push({
+              name: this.input,
+              status: 'in_progress',
+            })
+            this.input = ''
+          },
+          // 完了
+          finish(index) {
+            this.list[index].status = 'finished'
+          }
+        },
+
+        // data 確認用
+        computed: {
+          allData() {
+            return JSON.stringify(this.$data, null , "  ")
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
